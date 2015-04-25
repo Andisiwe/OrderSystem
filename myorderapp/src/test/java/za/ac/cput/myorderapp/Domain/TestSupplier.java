@@ -3,7 +3,7 @@ package za.ac.cput.myorderapp.Domain;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import za.ac.cput.myorderapp.conf.Factory.OrderSystemFactory;
+import za.ac.cput.myorderapp.conf.Factory.SupplierFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class TestSupplier {
         values.put("name", "Andisiwe");
         values.put("phone", "222222");
 
-        Supplier supplier = OrderSystemFactory.createSupplier(1, values);
+        Supplier supplier = SupplierFactory.createSupplier(1, values);
         Assert.assertEquals("Andisiwe", supplier.getName());
 
     }

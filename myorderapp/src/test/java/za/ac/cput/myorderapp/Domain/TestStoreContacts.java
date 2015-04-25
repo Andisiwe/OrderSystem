@@ -3,7 +3,7 @@ package za.ac.cput.myorderapp.Domain;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import za.ac.cput.myorderapp.conf.Factory.OrderSystemFactory;
+import za.ac.cput.myorderapp.conf.Factory.StoreContactsFactory;
 
 
 /**
@@ -19,14 +19,14 @@ public class TestStoreContacts {
     @Test
     public void testCreateStoreContacts() throws Exception {
 
-        StoreContacts storeContacts = OrderSystemFactory.createStoreContacts("Harrington", "123456789");
+        StoreContacts storeContacts = StoreContactsFactory.createStoreContacts("Harrington", "123456789");
         Assert.assertEquals("Harrington", storeContacts.getAddress());
 
     }
 
     @Test
     public void testUpdatedStoreContacts() throws Exception {
-        StoreContacts storeContacts = OrderSystemFactory.createStoreContacts("Harrington", "123456789");
+        StoreContacts storeContacts = StoreContactsFactory.createStoreContacts("Harrington", "123456789");
         StoreContacts newStoreContacts = new StoreContacts.Builder("Harrington")
                                                             .copy(storeContacts)
                                                             .phone("12345")
