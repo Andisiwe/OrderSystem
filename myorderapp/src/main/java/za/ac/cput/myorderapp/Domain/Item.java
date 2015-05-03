@@ -1,15 +1,22 @@
 package za.ac.cput.myorderapp.Domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by student on 2015/04/23.
  */
+@Entity
 public class Item implements Serializable {
+    @Id
     private int itemNo;
+
     private String name;
     private String brand;
-    private double price;
+    @Embedded
+    private TotalPrice price;
+    //@OneToMany
+    //@JoinColumn(name = "item_no")
 
     private Item(){}
 
@@ -23,13 +30,13 @@ public class Item implements Serializable {
     public int getItemNo(){return itemNo;}
     public String getName(){return name;}
     public String getBrand(){return brand;}
-    public double getPrice(){return price;}
+    public TotalPrice getPrice(){return price;}
 
     public static class Builder{
         private int itemNo;
         private String name;
         private String brand;
-        private double price;
+        private TotalPrice price;
 
         public Builder(String name){
             this.name = name;
@@ -50,7 +57,7 @@ public class Item implements Serializable {
             return  this;
         }
 
-        public Builder price(double price){
+        public Builder price(TotalPrice price){
             this.price = price;
             return this;
         }

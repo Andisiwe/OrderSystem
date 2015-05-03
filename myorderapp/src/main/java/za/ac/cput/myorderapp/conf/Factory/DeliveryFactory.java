@@ -8,7 +8,7 @@ import java.util.Map;
  * Created by student on 2015/04/25.
  */
 public class DeliveryFactory {
-    public static Delivery createDelivery(int deliveryNo,Map<String, String> values){
+    public static Delivery createDelivery(Long deliveryNo,Map<String, String> values){
         Delivery delivery = new Delivery.Builder(values.get("itemDelivered"))
                 .deliveryNo(deliveryNo)
                 .destination(values.get("destination"))

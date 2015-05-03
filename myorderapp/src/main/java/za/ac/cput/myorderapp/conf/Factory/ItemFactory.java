@@ -1,6 +1,7 @@
 package za.ac.cput.myorderapp.conf.Factory;
 
 import za.ac.cput.myorderapp.Domain.Item;
+import za.ac.cput.myorderapp.Domain.TotalPrice;
 
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import java.util.Map;
  * Created by student on 2015/04/25.
  */
 public class ItemFactory {
-    public static Item createItem(int itemNo, Map<String, String> values, double price){
+    public static Item createItem(int itemNo, Map<String, String> values, TotalPrice price){
         Item item = new Item.Builder(values.get("name"))
                 .itemNo(itemNo)
                 .brand(values.get("brand"))

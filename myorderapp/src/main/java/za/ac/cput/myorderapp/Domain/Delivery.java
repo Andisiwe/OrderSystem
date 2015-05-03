@@ -1,12 +1,16 @@
 package za.ac.cput.myorderapp.Domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * Created by student on 2015/04/23.
  */
+@Entity
 public class Delivery implements Serializable {
-    private int deliveryNo;
+    @Id
+    private Long deliveryNo;
     private String itemDelivered;
     private String destination;
 
@@ -18,12 +22,12 @@ public class Delivery implements Serializable {
         this.destination = builder.destination;
     }
 
-    public int getDeliveryNo(){return deliveryNo;}
+    public Long getDeliveryNo(){return deliveryNo;}
     public String getItemDelivered(){return itemDelivered;}
     public String getDestination(){return destination;}
 
     public static class Builder{
-        private int deliveryNo;
+        private Long deliveryNo;
         private String itemDelivered;
         private String destination;
 
@@ -31,7 +35,7 @@ public class Delivery implements Serializable {
             this.itemDelivered = itemDelivered;
         }
 
-        public Builder deliveryNo(int deliveryNo){
+        public Builder deliveryNo(Long deliveryNo){
             this.deliveryNo = deliveryNo;
             return this;
         }

@@ -1,10 +1,12 @@
 package za.ac.cput.myorderapp.Domain;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
  * Created by student on 2015/04/23.
  */
+@Embeddable
 public class StoreContacts implements Serializable {
     private String address;
     private String phone;

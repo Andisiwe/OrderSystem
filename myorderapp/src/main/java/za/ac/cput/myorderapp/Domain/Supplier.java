@@ -1,12 +1,17 @@
 package za.ac.cput.myorderapp.Domain;
 
+import javax.persistence.Id;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 /**
  * Created by student on 2015/04/23.
  */
+@Entity
 public class Supplier implements Serializable {
+    @Id
     private int supplierNo;
+
     private String name;
     private String phone;
 

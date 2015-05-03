@@ -1,14 +1,21 @@
 package za.ac.cput.myorderapp.Domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by student on 2015/04/23.
  */
+@Entity
 public class Store implements Serializable {
-    private int storeId;
+    @Id
+    private Long storeId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String name;
-    private String address;
+    @Embedded
+    private StoreContacts address;
+   // @OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "store_id")
 
     private Store(){}
 
@@ -18,20 +25,20 @@ public class Store implements Serializable {
         this.address = builder.address;
     }
 
-    public int getStoreId(){return storeId;}
+    public Long getStoreId(){return storeId;}
     public String getName(){return name;}
-    public String getAddress(){return address;}
+    public StoreContacts getAddress(){return address;}
 
     public static class Builder{
-        private int storeId;
+        private Long storeId;
         private String name;
-        private String address;
+        private StoreContacts address;
 
         public Builder(String name){
             this.name = name;
         }
 
-        public Builder storeId(int storeId){
+        public Builder storeId(Long storeId){
             this.storeId = storeId;
             return this;
         }
@@ -41,7 +48,7 @@ public class Store implements Serializable {
             return this;
         }
 
-        public Builder address(String address){
+        public Builder address(StoreContacts address){
             this.address = address;
             return this;
         }

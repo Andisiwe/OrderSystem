@@ -1,12 +1,14 @@
 package za.ac.cput.myorderapp.Domain;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
  * Created by student on 2015/04/23.
  */
+@Embeddable
 public class Customer implements Serializable {
-    private int id;
+    private Long id;
     private String name;
     private String phone;
     private String email;
@@ -18,13 +20,13 @@ public class Customer implements Serializable {
         this.email = builder.email;
     }
 
-    public int getId(){return id;}
+    public Long getId(){return id;}
     public String getName(){return name;}
     public String getPhone(){return phone;}
     public String getEmail(){return email;}
 
     public static class Builder{
-        int id;
+        Long id;
         String name;
         String phone;
         String email;
@@ -33,7 +35,7 @@ public class Customer implements Serializable {
             this.name = name;
         }
 
-        public Builder id(int id){
+        public Builder id(Long id){
             this.id = id;
             return this;
         }

@@ -1,11 +1,15 @@
 package za.ac.cput.myorderapp.Domain;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Created by student on 2015/04/23.
  */
+@Entity
 public class Stock implements Serializable {
+    @Id
     private int id;
     private int quantity;
 

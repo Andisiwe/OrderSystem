@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import za.ac.cput.myorderapp.conf.Factory.ItemFactory;
+import za.ac.cput.myorderapp.conf.Factory.TotalPriceFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +24,9 @@ public class TestItem {
         Map<String, String> values = new HashMap<String, String>();
         values.put("name", "Noodles");
         values.put("brand", "Maggi");
+        TotalPrice t = TotalPriceFactory.createTotalPrice(3.00);
 
-        Item item = ItemFactory.createItem(1,values,3.00);
+        Item item = ItemFactory.createItem(1,values,t);
         Assert.assertEquals("Maggi", item.getBrand());
 
     }
@@ -34,8 +36,9 @@ public class TestItem {
         Map<String, String> values = new HashMap<String, String>();
         values.put("name", "Noodles");
         values.put("brand", "Maggi");
+        TotalPrice t = TotalPriceFactory.createTotalPrice(3.00);
 
-        Item item = ItemFactory.createItem(1,values,3.00);
+        Item item = ItemFactory.createItem(1,values,t);
         Item newItem = new Item.Builder("Noodles")
                                 .copy(item)
                                 .brand("Bokomo")
