@@ -25,7 +25,7 @@ public class TestOrder {
         values.put("orderedDate", "5-April-2015");
         values.put("shippedDate", "20-April-2015");
 
-        Order order = OrderFactory.createOrder(1, values, 200);
+        Order order = OrderFactory.createOrder((long)1, values, 200);
         Assert.assertEquals("5-April-2015", order.getOrderedDate());
     }
 }

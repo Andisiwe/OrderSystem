@@ -24,7 +24,7 @@ public class TestDelivery {
         values.put("itemDelivered","Pizza");
         values.put("destination", "Caledon street");
 
-        Delivery delivery = DeliveryFactory.createDelivery(1,values);
+        Delivery delivery = DeliveryFactory.createDelivery((long)1,values);
         Assert.assertEquals("Pizza", delivery.getItemDelivered());
 
     }
@@ -35,7 +35,7 @@ public class TestDelivery {
         values.put("itemDelivered","Pizza");
         values.put("destination", "Caledon street");
 
-        Delivery delivery = DeliveryFactory.createDelivery(1,values);
+        Delivery delivery = DeliveryFactory.createDelivery((long)1,values);
         Delivery newDelivery = new Delivery.Builder("Pizza")
                                             .copy(delivery)
                                             .itemDelivered("Cake")

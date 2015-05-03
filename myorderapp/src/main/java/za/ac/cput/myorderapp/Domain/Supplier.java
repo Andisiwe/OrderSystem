@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 public class Supplier implements Serializable {
     @Id
-    private int supplierNo;
+    private Long supplierNo;
 
     private String name;
     private String phone;
@@ -23,12 +23,12 @@ public class Supplier implements Serializable {
         this.phone = builder.phone;
     }
 
-    public int getSupplierNo(){return supplierNo;}
+    public Long getSupplierNo(){return supplierNo;}
     public String getName(){return name;}
     public String getPhone(){return phone;}
 
     public static class Builder{
-        private int supplierNo;
+        private Long supplierNo;
         private String name;
         private String phone;
 
@@ -36,7 +36,7 @@ public class Supplier implements Serializable {
             this.name = name;
         }
 
-        public Builder supplierNo(int supplierNo){
+        public Builder supplierNo(Long supplierNo){
             this.supplierNo = supplierNo;
             return this;
         }

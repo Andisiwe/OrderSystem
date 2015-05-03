@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 public class Item implements Serializable {
     @Id
-    private int itemNo;
+    private Long itemNo;
 
     private String name;
     private String brand;
@@ -27,13 +27,13 @@ public class Item implements Serializable {
         this.price = builder.price;
     }
 
-    public int getItemNo(){return itemNo;}
+    public Long getItemNo(){return itemNo;}
     public String getName(){return name;}
     public String getBrand(){return brand;}
     public TotalPrice getPrice(){return price;}
 
     public static class Builder{
-        private int itemNo;
+        private Long itemNo;
         private String name;
         private String brand;
         private TotalPrice price;
@@ -42,7 +42,7 @@ public class Item implements Serializable {
             this.name = name;
         }
 
-        public Builder itemNo(int itemNo){
+        public Builder itemNo(Long itemNo){
             this.itemNo = itemNo;
             return this;
         }

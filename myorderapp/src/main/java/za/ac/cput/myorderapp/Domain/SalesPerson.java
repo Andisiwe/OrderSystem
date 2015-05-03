@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 public class SalesPerson implements Serializable {
     @Id
-    private int id;
+    private Long id;
 
     private String name;
     private int age;
@@ -23,12 +23,12 @@ public class SalesPerson implements Serializable {
         this.age = builder.age;
     }
 
-    public int getId(){return id;}
+    public Long getId(){return id;}
     public String getName(){return name;}
     public int getAge(){return age;}
 
     public static class Builder{
-        private int id;
+        private Long id;
         private String name;
         private int age;
 
@@ -36,7 +36,7 @@ public class SalesPerson implements Serializable {
             this.name = name;
         }
 
-        public Builder id(int id){
+        public Builder id(Long id){
             this.id = id;
             return this;
         }

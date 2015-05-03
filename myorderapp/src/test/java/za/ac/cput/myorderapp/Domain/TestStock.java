@@ -17,7 +17,7 @@ public class TestStock {
 
     @Test
     public void testCreateStock() throws Exception {
-        Stock stock = StockFactory.createStock(1,10);
+        Stock stock = StockFactory.createStock((long)1,10);
         Assert.assertEquals(10, stock.getQuantity());
 
     }

@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import za.ac.cput.myorderapp.App;
 import za.ac.cput.myorderapp.Domain.Delivery;
@@ -20,7 +21,7 @@ import java.util.Map;
 @SpringApplicationConfiguration(classes = App.class)
 @WebAppConfiguration
 
-public class TestCrudDelivery {
+public class TestCrudDelivery extends AbstractTestNGSpringContextTests {
     private Long id;
 
     @Autowired

@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 public class Order implements Serializable {
     @Id
-    private int orderNo;
+    private Long orderNo;
 
     private String item;
     private String orderedDate;
@@ -27,14 +27,14 @@ public class Order implements Serializable {
         this.price = builder.price;
     }
 
-    public int getOrderNo(){return orderNo;}
+    public Long getOrderNo(){return orderNo;}
     public String getItem(){return item;}
     public double getPrice(){return price;}
     public String getOrderedDate(){return orderedDate;}
     public String getShippedDate(){return shippedDate;}
 
     public static class Builder{
-        private int orderNo;
+        private Long orderNo;
         private String item;
         private String orderedDate;
         private String shippedDate;
@@ -44,7 +44,7 @@ public class Order implements Serializable {
             this.item = item;
         }
 
-        public Builder orderNo(int orderNo){
+        public Builder orderNo(Long orderNo){
             this.orderNo = orderNo;
             return this;
         }

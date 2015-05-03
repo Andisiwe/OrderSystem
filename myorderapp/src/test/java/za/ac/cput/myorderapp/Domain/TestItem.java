@@ -26,7 +26,7 @@ public class TestItem {
         values.put("brand", "Maggi");
         TotalPrice t = TotalPriceFactory.createTotalPrice(3.00);
 
-        Item item = ItemFactory.createItem(1,values,t);
+        Item item = ItemFactory.createItem((long)1,values,t);
         Assert.assertEquals("Maggi", item.getBrand());
 
     }
@@ -38,7 +38,7 @@ public class TestItem {
         values.put("brand", "Maggi");
         TotalPrice t = TotalPriceFactory.createTotalPrice(3.00);
 
-        Item item = ItemFactory.createItem(1,values,t);
+        Item item = ItemFactory.createItem((long)1,values,t);
         Item newItem = new Item.Builder("Noodles")
                                 .copy(item)
                                 .brand("Bokomo")

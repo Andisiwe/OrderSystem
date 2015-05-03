@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class Stock implements Serializable {
     @Id
-    private int id;
+    private Long id;
     private int quantity;
 
     private Stock(){}
@@ -20,18 +20,18 @@ public class Stock implements Serializable {
         this.quantity = builder.quantity;
     }
 
-    public int getId(){return id;}
+    public Long getId(){return id;}
     public int getQuantity(){return quantity;}
 
     public static class Builder{
-        private int id;
+        private Long id;
         private int quantity;
 
-        public Builder(int id){
+        public Builder(Long id){
             this.id = id;
         }
 
-        public Builder id(int id){
+        public Builder id(Long id){
             this.id = id;
             return this;
         }

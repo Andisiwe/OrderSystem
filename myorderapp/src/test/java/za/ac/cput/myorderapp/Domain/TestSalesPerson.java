@@ -18,7 +18,7 @@ public class TestSalesPerson {
 
     @Test
     public void testCreateSalesPerson() throws Exception {
-        SalesPerson salesPerson = SalesPersonFactory.createSalesPerson(1, "Yamkela", 30);
+        SalesPerson salesPerson = SalesPersonFactory.createSalesPerson((long)1, "Yamkela", 30);
         Assert.assertEquals(30, salesPerson.getAge());
 
     }

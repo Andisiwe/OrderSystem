@@ -24,7 +24,7 @@ public class TestSupplier {
         values.put("name", "Andisiwe");
         values.put("phone", "222222");
 
-        Supplier supplier = SupplierFactory.createSupplier(1, values);
+        Supplier supplier = SupplierFactory.createSupplier((long)1, values);
         Assert.assertEquals("Andisiwe", supplier.getName());
 
     }

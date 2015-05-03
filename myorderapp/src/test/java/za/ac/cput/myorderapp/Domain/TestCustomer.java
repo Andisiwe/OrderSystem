@@ -26,7 +26,7 @@ public class TestCustomer {
         values.put("phone", "12345");
         values.put("email", "@mycput");
 
-        Customer customer = CustomerFactory.createCustomer(1, values);
+        Customer customer = CustomerFactory.createCustomer((long)1, values);
         Assert.assertEquals("Andisiwe", customer.getName());
 
     }
@@ -38,7 +38,7 @@ public class TestCustomer {
         values.put("phone", "12345");
         values.put("email", "@mycput");
 
-        Customer customer = CustomerFactory.createCustomer(1,values);
+        Customer customer = CustomerFactory.createCustomer((long)1,values);
         Customer newCustomer = new Customer.Builder("Andisiwe")
                                             .copy(customer)
                                             .name("Peter")
