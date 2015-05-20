@@ -1,41 +1,61 @@
 package za.ac.cput.myorderapp.Repository;
 
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import za.ac.cput.myorderapp.App;
+import za.ac.cput.myorderapp.Domain.ContactAddress;
 import za.ac.cput.myorderapp.Domain.Customer;
+import za.ac.cput.myorderapp.Domain.CustomerContactsNos;
+import za.ac.cput.myorderapp.Domain.Orders;
+import za.ac.cput.myorderapp.conf.Factory.AddressFactory;
+import za.ac.cput.myorderapp.conf.Factory.ContactsFactory;
+import za.ac.cput.myorderapp.conf.Factory.CustomerFactory;
+import za.ac.cput.myorderapp.conf.Factory.OrderFactory;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by student on 2015/05/03.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+
 @SpringApplicationConfiguration(classes = App.class)
 @WebAppConfiguration
-
 public class TestCrudCustomer extends AbstractTestNGSpringContextTests {
     private Long id;
 
-    @Autowired
+   @Autowired
     CustomerRepository customerRepository;
+
+    @BeforeMethod
+    public void setUp() throws Exception {
+
+
+    }
 
     @Test
     public void testCreate() throws Exception {
-        Map<String, String> values = new HashMap<String, String>();
-        values.put("name", "Yamkela");
-        values.put("phone", "155");
-        values.put("email", "a@gmsil");
+        Map<String, String> custDetails = new HashMap<String, String>();
+        custDetails.put("name", "Andisiwe");
+        custDetails.put("surname", "Peter");
 
-        Customer customer = new Customer.Builder(values.get("name")).id((long) 1)
-                .phone(values.get("phone")).email(values.get("email")).build();
+        Map<String,String>address = new HashMap<String,String>();
+        address.put("physicalAddress", "18 Harrington street");
+        address.put("postalAddress", "P. O. BOX 10");
+
+        Date date = new Date();
+
+        ContactAddress contactAddress = AddressFactory.createAddress(address, 8001);
+        CustomerContactsNos contactsNos = ContactsFactory.createContacts("082123", "021123");
+        Orders orders = OrderFactory.createOrder("10-MAY-15");
+
+        Customer customer = CustomerFactory.createCustomer(custDetails);// contactAddress, contactsNos,order);
 
         customerRepository.save(customer);
         id = customer.getId();
@@ -43,29 +63,39 @@ public class TestCrudCustomer extends AbstractTestNGSpringContextTests {
 
     }
 
-    @Test
+    @Test(dependsOnMethods = "testCreate")
     public void testRead() throws Exception {
         Customer customer = customerRepository.findOne(id);
         Assert.assertEquals("Andisiwe", customer.getName());
 
     }
 
-    @Test
+    @Test(dependsOnMethods = "testRead")
     public void testUpdate() throws Exception {
-        Map<String, String> values = new HashMap<String, String>();
-        values.put("name", "Andisiwe");
-        values.put("phone", "155");
-        values.put("email", "a@gmsil");
-
         Customer customer = customerRepository.findOne(id);
-        Customer newCustomer = new Customer.Builder(values.get("name")).id(customer.getId())
-                .phone(values.get("phone")).email(values.get("email")).build();
+
+        Map<String, String> custDetails = new HashMap<String, String>();
+        custDetails.put("name", "Yamkela");
+        custDetails.put("surname", "Peter");
+
+        Map<String,String>address = new HashMap<String,String>();
+        address.put("physicalAddress", "18 Harrington street");
+        address.put("postalAddress", "P. O. BOX 10");
+
+        Date date = new Date();
+
+        /*ContactAddress contactAddress = AddressFactory.createAddress(address, 8001);
+        CustomerContactsNos contactsNos = ContactsFactory.createContacts("082123", "021123");
+        Order order = OrderFactory.createOrder(date);*/
+
+        Customer newCustomer = CustomerFactory.createCustomer(custDetails);// contactAddress, contactsNos,order);
+
         customerRepository.save(newCustomer);
-        Assert.assertEquals("Andisiwe", customer.getName());
+        Assert.assertEquals("Yamkela", newCustomer.getName());
 
     }
 
-    @Test
+    @Test(dependsOnMethods = "testUpdate")
     public void testDelete() throws Exception {
         Customer customer = customerRepository.findOne(id);
         customerRepository.delete(customer);

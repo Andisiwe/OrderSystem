@@ -9,15 +9,13 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         TestCustomer.class,
-        TestDelivery.class,
-        TestItem.class,
         TestOrder.class,
-        TestSalesPerson.class,
-        TestStock.class,
-        TestStore.class,
-        TestStoreContacts.class,
-        TestSupplier.class,
-        TestTotalPrice.class
+        TestContactAddress.class,
+        TestOrder.class,
+        TestAuditTopping.class,
+        TestBase.class,
+        TestPizza.class,
+        TestTopping.class
 })
 public class DomainTestSuite {
 }

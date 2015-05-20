@@ -5,8 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import za.ac.cput.myorderapp.conf.Factory.OrderFactory;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 
 /**
  * Created by student on 2015/04/24.
@@ -20,12 +19,8 @@ public class TestOrder {
 
     @Test
     public void testCreateOrder() throws Exception {
-        Map<String, String>values = new HashMap<String, String>();
-        values.put("item","Cake");
-        values.put("orderedDate", "5-April-2015");
-        values.put("shippedDate", "20-April-2015");
+        Orders orders = OrderFactory.createOrder("10-MAY-15");
 
-        Order order = OrderFactory.createOrder((long)1, values, 200);
-        Assert.assertEquals("5-April-2015", order.getOrderedDate());
+        Assert.assertEquals("10-MAY-15", orders.getOrder_date());
     }
 }

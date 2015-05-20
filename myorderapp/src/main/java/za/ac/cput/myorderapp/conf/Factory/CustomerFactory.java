@@ -8,11 +8,13 @@ import java.util.Map;
  * Created by student on 2015/04/25.
  */
 public class CustomerFactory {
-    public static Customer createCustomer(Long id, Map<String, String> values){
+    public static Customer createCustomer(Map<String, String> values)/* ContactAddress address,
+                                          CustomerContactsNos contactsNos, Orders order)*/{
         Customer customer = new Customer.Builder(values.get("name"))
-                .id(id)
-                .phone(values.get("phone"))
-                .email(values.get("email"))
+                .surname(values.get("surname"))
+             //   .address(address)
+              //  .contactNos(contactsNos)
+              //  .order(order)
                 .build();
 
         return customer;

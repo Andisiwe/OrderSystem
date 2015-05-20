@@ -3,8 +3,14 @@ package za.ac.cput.myorderapp.Domain;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import za.ac.cput.myorderapp.conf.Factory.AddressFactory;
+import za.ac.cput.myorderapp.conf.Factory.ContactsFactory;
 import za.ac.cput.myorderapp.conf.Factory.CustomerFactory;
+import za.ac.cput.myorderapp.conf.Factory.OrderFactory;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,31 +27,51 @@ public class TestCustomer {
 
     @Test
     public void testCreateCustomer() throws Exception {
-        Map<String, String>values = new HashMap<String, String>();
-        values.put("name", "Andisiwe");
-        values.put("phone", "12345");
-        values.put("email", "@mycput");
+        Map<String, String>addr = new HashMap<String, String>();
+        addr.put("physicalAddress", "18 Harrington street");
+        addr.put("postalAddress", "P. O. BOX 10");
 
-        Customer customer = CustomerFactory.createCustomer((long)1, values);
+        Map<String, String>custDetails = new HashMap<String, String>();
+        custDetails.put("name","Andisiwe");
+        custDetails.put("surname", "Peter");
+
+        Date date = new Date();
+
+        /*ContactAddress address = AddressFactory.createAddress(addr, 8001);
+        CustomerContactsNos contactsNos = ContactsFactory.createContacts("12345", "67890");
+        Order order = OrderFactory.createOrder(date);*/
+
+        Customer customer = CustomerFactory.createCustomer(custDetails);// address, contactsNos,order);
         Assert.assertEquals("Andisiwe", customer.getName());
 
     }
 
     @Test
     public void testUpdatedCustomer() throws Exception {
-        Map<String, String>values = new HashMap<String, String>();
-        values.put("name", "Andisiwe");
-        values.put("phone", "12345");
-        values.put("email", "@mycput");
+        Map<String, String>addr = new HashMap<String, String>();
+        addr.put("physicalAddress", "18 Harrington street");
+        addr.put("postalAddress", "P. O. BOX 10");
 
-        Customer customer = CustomerFactory.createCustomer((long)1,values);
+        Map<String, String>custDetails = new HashMap<String, String>();
+        custDetails.put("name","Andisiwe");
+        custDetails.put("surname", "Peter");
+
+        Date date = new Date();
+        System.out.println(date);
+
+        /*ContactAddress address = AddressFactory.createAddress(addr, 8001);
+        CustomerContactsNos contactsNos = ContactsFactory.createContacts("12345", "67890");
+        Order order = OrderFactory.createOrder(date);*/
+
+        Customer customer = CustomerFactory.createCustomer(custDetails);// address, contactsNos,order);
+
         Customer newCustomer = new Customer.Builder("Andisiwe")
                                             .copy(customer)
-                                            .name("Peter")
+                                            .surname("Paul")
                                             .build();
 
-        Assert.assertEquals("Peter", newCustomer.getName());
-        Assert.assertEquals("Andisiwe", customer.getName());
+        Assert.assertEquals("Paul", newCustomer.getSurname());
+        Assert.assertEquals("Peter", customer.getSurname());
 
     }
 }
