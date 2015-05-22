@@ -1,12 +1,12 @@
 package za.ac.cput.myorderapp.Model;
 
-//import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.ResourceSupport;
 
 /**
  * Created by Andies on 2015-05-21.
  */
-public class PizzaResource{/*} extends ResourceSupport {
-   /* private Long pizza_no;
+public class PizzaResource extends ResourceSupport {
+    private Long pizza_no;
     private double price;
     private String name;
 
@@ -57,5 +57,5 @@ public class PizzaResource{/*} extends ResourceSupport {
         }
 
         public PizzaResource build(){return new PizzaResource(this);}
-    }*/
+    }
 }

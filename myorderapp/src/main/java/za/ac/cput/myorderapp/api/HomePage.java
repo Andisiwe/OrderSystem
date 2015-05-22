@@ -15,7 +15,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("/api/**")
 public class HomePage {
-    /*
+
     @Autowired
     private AuditToppingService service;
 
@@ -33,5 +33,5 @@ public class HomePage {
     }
 
     @RequestMapping(value = "/auditInfo", method = RequestMethod.GET)
-    public AuditTopping getAuditToppings(){return service.getAuditInfo();}*/
+    public AuditTopping getAuditToppings(){return service.getAuditInfo();}
 }

@@ -1,11 +1,11 @@
 package za.ac.cput.myorderapp.Model;
 
-//import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.ResourceSupport;
 
 /**
  * Created by Andies on 2015-05-21.
  */
-public class ToppingResource{/* extends ResourceSupport {
+public class ToppingResource extends ResourceSupport {
     private Long top_code;
     private double price;
 
@@ -40,6 +40,6 @@ public class ToppingResource{/* extends ResourceSupport {
         public ToppingResource build(){
             return new ToppingResource(this);
         }
-    }*/
+    }
 
 }

@@ -1,12 +1,12 @@
 package za.ac.cput.myorderapp.Model;
 
-//import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.ResourceSupport;
 import za.ac.cput.myorderapp.Repository.OrderRepository;
 
 /**
  * Created by Andies on 2015-05-21.
  */
-public class OrderResource{/*} extends ResourceSupport {
+public class OrderResource extends ResourceSupport {
     private Long orderNo;
     private String order_date;
 
@@ -34,6 +34,6 @@ public class OrderResource{/*} extends ResourceSupport {
         }
 
         public OrderResource build(){return new OrderResource(this);}
-    }*/
+    }
 
 }

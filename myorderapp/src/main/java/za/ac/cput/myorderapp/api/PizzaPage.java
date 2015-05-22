@@ -1,7 +1,7 @@
 package za.ac.cput.myorderapp.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Link;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +20,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "pizza/**")
 public class PizzaPage {
-    /*
     @Autowired
     private PizzaService service;
     @RequestMapping(value = "/(id)", method = RequestMethod.GET)
@@ -38,6 +37,8 @@ public class PizzaPage {
                                                   .build();
         Link piz = new Link("http://localhost:8080/pizza"+resource.getPizza_no().toString())
                 .withRel("piz");
+        resource.add(piz);
+        hateos.add(resource);
         return hateos;
-    }*/
+    }
 }

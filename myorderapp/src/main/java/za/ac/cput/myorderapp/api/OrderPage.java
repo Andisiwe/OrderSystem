@@ -1,7 +1,7 @@
 package za.ac.cput.myorderapp.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Link;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/order/**")
 public class OrderPage {
-   /* @Autowired
+    @Autowired
     private OrderService service;
     @RequestMapping(value = "/(id)", method = RequestMethod.GET)
     public Orders getOrder(@PathVariable Long id){
@@ -36,6 +36,8 @@ public class OrderPage {
                                                   .build();
         Link ord = new Link("http://localhost:8080/order"+resource.getOrderNo().toString())
                 .withRel("ord");
+        resource.add(ord);
+        hateos.add(resource);
         return hateos;
-    }*/
+    }
 }

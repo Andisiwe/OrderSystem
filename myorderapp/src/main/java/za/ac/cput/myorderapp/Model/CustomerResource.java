@@ -1,11 +1,11 @@
 package za.ac.cput.myorderapp.Model;
 
-//import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.ResourceSupport;
 
 /**
  * Created by Andies on 2015-05-21.
  */
-public class CustomerResource{ /*extends ResourceSupport {
+public class CustomerResource extends ResourceSupport {
     private Long cust_id;
     private String name;
     private String surname;
@@ -51,5 +51,5 @@ public class CustomerResource{ /*extends ResourceSupport {
         public CustomerResource build(){
                 return new CustomerResource(this);
             }
-    }*/
+    }
 }
