@@ -38,6 +38,7 @@ public class CustomerPage {
                 .withRel("cust");
         resource.add(cust);
         hateos.add(resource);
+        
         return hateos;
     }
 }
