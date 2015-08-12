@@ -8,8 +8,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import za.ac.cput.myorderapp.App;
+import za.ac.cput.myorderapp.Domain.AuditTopping;
 import za.ac.cput.myorderapp.Domain.Topping;
 import za.ac.cput.myorderapp.conf.Factory.ToppingFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-19.
@@ -30,7 +34,8 @@ public class TestCrudTopping extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        Topping topping = ToppingFactory.createTopping(5);
+        List<AuditTopping> auditToppings = new ArrayList<>();
+        Topping topping = ToppingFactory.createTopping(5, auditToppings);
         repository.save(topping);
         id = topping.getTop_code();
         Assert.assertNotNull(topping.getTop_code());

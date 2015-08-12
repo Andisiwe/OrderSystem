@@ -8,6 +8,7 @@ import za.ac.cput.myorderapp.Domain.AuditTopping;
 import za.ac.cput.myorderapp.Services.AuditToppingService;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-21.
@@ -33,5 +34,5 @@ public class HomePage {
     }
 
     @RequestMapping(value = "/auditInfo", method = RequestMethod.GET)
-    public AuditTopping getAuditToppings(){return service.getAuditInfo();}
+    public List<AuditTopping> getAuditToppings(){return service.getAuditInfo();}
 }

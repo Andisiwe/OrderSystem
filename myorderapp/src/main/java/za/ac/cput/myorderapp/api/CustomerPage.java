@@ -22,22 +22,24 @@ public class CustomerPage {
     @Autowired
     private CustomerService service;
     @RequestMapping(value = "/(id)", method = RequestMethod.GET)
-    public Customer getCustomer(@PathVariable Long id){
+    public List<Customer> getCustomer(@PathVariable Long id){
         return service.getCustomerInfo();
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public List<CustomerResource> getCustomers() {
         List<CustomerResource> hateos = new ArrayList<>();
-        Customer customer = service.getCustomerInfo();
-        CustomerResource resource = new CustomerResource.Builder(customer.getName())
-                .surname(customer.getSurname())
-                .id(customer.getId())
-                .build();
-        Link cust = new Link("http://localhost:8080/customer/" + resource.getCust_Id().toString())
-                .withRel("cust");
-        resource.add(cust);
-        hateos.add(resource);
+        List<Customer> customer = service.getCustomerInfo();
+        for(Customer customer1: customer) {
+            CustomerResource resource = new CustomerResource.Builder(customer1.getName())
+                    .surname(customer1.getSurname())
+                    .id(customer1.getId())
+                    .build();
+            Link cust = new Link("http://localhost:8080/customer/" + resource.getCust_Id().toString())
+                    .withRel("cust");
+            resource.add(cust);
+            hateos.add(resource);
+        }
         
         return hateos;
     }

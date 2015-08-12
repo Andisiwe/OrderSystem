@@ -6,6 +6,9 @@ import za.ac.cput.myorderapp.Domain.Orders;
 import za.ac.cput.myorderapp.Repository.OrderRepository;
 import za.ac.cput.myorderapp.Services.OrderService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andies on 2015-05-20.
  */
@@ -15,8 +18,14 @@ public class OrderServiceImpl implements OrderService{
     OrderRepository repository;
 
     @Override
-    public Orders getOrderInfo() {
-        Orders orders = repository.findOne((long) 1);
+    public List<Orders> getOrderInfo() {
+        List<Orders> orders = new ArrayList<>();
+
+        Iterable<Orders> order = repository.findAll();
+        for (Orders orders1 : order){
+            orders.add(orders1);
+        }
+
         return orders;
     }
 }

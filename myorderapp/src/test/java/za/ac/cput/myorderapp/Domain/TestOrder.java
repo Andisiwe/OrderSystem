@@ -5,7 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import za.ac.cput.myorderapp.conf.Factory.OrderFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by student on 2015/04/24.
@@ -19,8 +21,10 @@ public class TestOrder {
 
     @Test
     public void testCreateOrder() throws Exception {
-        Orders orders = OrderFactory.createOrder("10-MAY-15");
+        //List<Pizza> pizzas = new ArrayList<>();
+        Date date = new Date();
+        Orders orders = OrderFactory.createOrder(date /*, pizzas*/);
 
-        Assert.assertEquals("10-MAY-15", orders.getOrder_date());
+        Assert.assertEquals(date, orders.getOrder_date());
     }
 }

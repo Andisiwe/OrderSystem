@@ -9,7 +9,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import za.ac.cput.myorderapp.App;
 import za.ac.cput.myorderapp.Domain.Pizza;
+import za.ac.cput.myorderapp.Domain.Topping;
 import za.ac.cput.myorderapp.conf.Factory.PizzaFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-15.
@@ -30,7 +34,8 @@ public class TestCrudPizza extends AbstractTestNGSpringContextTests{
 
     @Test
     public void create() throws Exception {
-        Pizza pizza = PizzaFactory.createPizza("Something meaty", 60);
+       // List<Topping>toppings = new ArrayList<Topping>();
+        Pizza pizza = PizzaFactory.createPizza("Something meaty", 60/*, toppings*/);
         pizzaRepository.save(pizza);
         id = pizza.getPizza_no();
         Assert.assertNotNull(pizza.getPizza_no());

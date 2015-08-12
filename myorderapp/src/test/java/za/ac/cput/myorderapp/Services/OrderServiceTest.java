@@ -9,8 +9,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import za.ac.cput.myorderapp.App;
 import za.ac.cput.myorderapp.Domain.Orders;
+import za.ac.cput.myorderapp.Domain.Pizza;
 import za.ac.cput.myorderapp.Repository.OrderRepository;
 import za.ac.cput.myorderapp.conf.Factory.OrderFactory;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-20.
@@ -35,7 +40,9 @@ public class OrderServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        Orders orders = OrderFactory.createOrder("2015-05-20");
+       // List<Pizza> pizzas = new ArrayList<>();
+        Date date = new Date();
+        Orders orders = OrderFactory.createOrder(date /*, pizzas*/);
         repository.save(orders);
         id = orders.getOrderNo();
         Assert.assertNotNull(orders.getOrderNo());
@@ -44,7 +51,7 @@ public class OrderServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetOrderInfo() throws Exception {
-        Orders orders = service.getOrderInfo();
+        List<Orders> orders = service.getOrderInfo();
         Assert.assertNotNull(orders);
 
     }

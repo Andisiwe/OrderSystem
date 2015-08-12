@@ -6,6 +6,9 @@ import za.ac.cput.myorderapp.Domain.Customer;
 import za.ac.cput.myorderapp.Repository.CustomerRepository;
 import za.ac.cput.myorderapp.Services.CustomerService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andies on 2015-05-20.
  */
@@ -15,8 +18,14 @@ public class CustomerServiceImpl implements CustomerService{
     CustomerRepository repository;
 
     @Override
-    public Customer getCustomerInfo() {
-        Customer customer = repository.findOne((long) 1);
-        return customer;
+    public List<Customer> getCustomerInfo() {
+        List<Customer> customers = new ArrayList<>();
+
+        Iterable<Customer> customers1s = repository.findAll();
+        for (Customer customer1 : customers1s){
+            customers.add(customer1);
+        }
+
+        return customers;
     }
 }

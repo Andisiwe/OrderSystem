@@ -2,6 +2,7 @@ package za.ac.cput.myorderapp.Domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-14.
@@ -12,12 +13,16 @@ public class Topping implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long top_code;
     private double price;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "top_code")
+    private List<AuditTopping> auditToppings;
 
     private Topping(){}
 
     public Topping(Builder builder){
         this.top_code = builder.top_code;
         this.price = builder.price;
+        this.auditToppings = builder.auditToppings;
     }
 
     public Long getTop_code() {
@@ -28,9 +33,14 @@ public class Topping implements Serializable {
         return price;
     }
 
+    public List<AuditTopping> getAuditToppings() {
+        return auditToppings;
+    }
+
     public static class Builder{
         private Long top_code;
         private double price;
+        private List<AuditTopping> auditToppings;
 
         public Builder(double price){
             this.price = price;
@@ -40,6 +50,12 @@ public class Topping implements Serializable {
             this.top_code = top_code;
             return this;
         }
+
+        public Builder auditTopping(List<AuditTopping> auditToppings){
+            this.auditToppings = auditToppings;
+            return this;
+        }
+
 
         public Topping build(){
             return new Topping(this);

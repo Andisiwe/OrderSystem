@@ -2,6 +2,7 @@ package za.ac.cput.myorderapp.Domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-14.
@@ -13,6 +14,9 @@ public class Pizza implements Serializable{
     private Long pizza_no;
     private double price;
     private String name;
+    /*@OneToMany//(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "pizza_no")
+    private List<Topping> topping;*/
 
     private Pizza(){}
 
@@ -20,6 +24,7 @@ public class Pizza implements Serializable{
         this.pizza_no = builder.pizza_no;
         this.price = builder.price;
         this.name = builder.name;
+       // this.topping = builder.topping;
     }
 
     public Long getPizza_no() {
@@ -34,10 +39,13 @@ public class Pizza implements Serializable{
         return name;
     }
 
+    //public List<Topping>getTopping(){return topping;}
+
     public static class Builder{
         private Long pizza_no;
         private double price;
         private String name;
+       // private List<Topping> topping;
 
         public Builder(String name){
             this.name = name;
@@ -53,10 +61,16 @@ public class Pizza implements Serializable{
             return this;
         }
 
+       /* public Builder topping(List<Topping> topping){
+            this.topping = topping;
+            return this;
+        }*/
+
         public Builder copy(Pizza value){
             this.pizza_no = value.pizza_no;
             this.name = value.name;
             this.price = value.price;
+         //   this.topping = value.topping;
             return this;
         }
 

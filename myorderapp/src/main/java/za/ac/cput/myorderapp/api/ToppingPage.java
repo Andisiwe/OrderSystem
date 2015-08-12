@@ -22,21 +22,23 @@ public class ToppingPage {
     @Autowired
     private ToppingService service;
     @RequestMapping(value = "/(id)", method = RequestMethod.GET)
-    public Topping getTopping(){
+    public List<Topping> getTopping(){
         return service.getToppingInfo();
     }
 
     @RequestMapping(value = "/toppings", method = RequestMethod.GET)
     public List<ToppingResource> getToppings(){
         List<ToppingResource>hateos= new ArrayList<>();
-        Topping topping = service.getToppingInfo();
-        ToppingResource resource = new ToppingResource.Builder(topping.getPrice())
-                                                      .top_code(topping.getTop_code())
-                                                      .build();
-        Link top = new Link("http://localhost:8080/topping/"+resource.getTop_code().toString())
-                .withRel("top");
-        resource.add(top);
-        hateos.add(resource);
+        List<Topping> toppings = service.getToppingInfo();
+        for(Topping topping: toppings ) {
+            ToppingResource resource = new ToppingResource.Builder(topping.getPrice())
+                    .top_code(topping.getTop_code())
+                    .build();
+            Link top = new Link("http://localhost:8080/topping/" + resource.getTop_code().toString())
+                    .withRel("top");
+            resource.add(top);
+            hateos.add(resource);
+        }
         return hateos;
     }
 }

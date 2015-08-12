@@ -3,6 +3,7 @@ package za.ac.cput.myorderapp.Domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-14.
@@ -15,9 +16,6 @@ public class AuditTopping implements Serializable {
     private Date dateChanged;
     private double oldPrice;
     private double newPrice;
-   /* @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "top_code")
-    private Topping topping;*/
 
     private AuditTopping(){}
 
@@ -26,7 +24,7 @@ public class AuditTopping implements Serializable {
         this.dateChanged = builder.dateChanged;
         this.oldPrice = builder.oldPrice;
         this.newPrice = builder.newPrice;
-        //this.topping = builder.topping;
+
     }
 
     public Long getUser_id() {
@@ -45,16 +43,13 @@ public class AuditTopping implements Serializable {
         return newPrice;
     }
 
-   /* public Topping getTopping() {
-        return topping;
-    }*/
+
 
     public static class Builder{
         private Long user_id;
         private Date dateChanged;
         private double oldPrice;
         private double newPrice;
-      //  private Topping topping;
 
         public Builder(Date dateChanged){
             this.dateChanged = dateChanged;
@@ -75,11 +70,6 @@ public class AuditTopping implements Serializable {
             return this;
         }
 
-       /* public Builder topping(Topping topping){
-            this.topping = topping;
-            return this;
-        }*/
-
         public Builder copy(AuditTopping value){
             this.user_id = value.user_id;
             this.dateChanged = value.dateChanged;
@@ -90,5 +80,15 @@ public class AuditTopping implements Serializable {
 
         public AuditTopping build(){return new AuditTopping(this);}
 
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

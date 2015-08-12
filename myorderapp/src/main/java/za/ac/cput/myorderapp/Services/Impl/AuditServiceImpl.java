@@ -6,6 +6,9 @@ import za.ac.cput.myorderapp.Domain.AuditTopping;
 import za.ac.cput.myorderapp.Repository.AuditToppingRepository;
 import za.ac.cput.myorderapp.Services.AuditToppingService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andies on 2015-05-20.
  */
@@ -15,8 +18,13 @@ public class AuditServiceImpl implements AuditToppingService {
     private AuditToppingRepository repository;
 
     @Override
-    public AuditTopping getAuditInfo() {
-        AuditTopping auditTopping = repository.findOne((long) 1);
-        return auditTopping;
+    public List<AuditTopping> getAuditInfo() {
+        List<AuditTopping> allAuditToppings = new ArrayList<>();
+
+        Iterable<AuditTopping> auditToppings = repository.findAll();
+        for (AuditTopping auditTopping1 : auditToppings){
+            allAuditToppings.add(auditTopping1);
+        }
+        return allAuditToppings;
     }
 }

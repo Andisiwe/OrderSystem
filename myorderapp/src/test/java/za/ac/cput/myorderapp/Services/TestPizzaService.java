@@ -9,8 +9,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import za.ac.cput.myorderapp.App;
 import za.ac.cput.myorderapp.Domain.Pizza;
+import za.ac.cput.myorderapp.Domain.Topping;
 import za.ac.cput.myorderapp.Repository.PizzaRepository;
 import za.ac.cput.myorderapp.conf.Factory.PizzaFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-20.
@@ -35,7 +39,8 @@ public class TestPizzaService extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        Pizza pizza = PizzaFactory.createPizza("Chicken and Mushroom", 60);
+        List<Topping> toppings = new ArrayList<>();
+        Pizza pizza = PizzaFactory.createPizza("Something meaty", 60/*, toppings*/);
         repository.save(pizza);
         id = pizza.getPizza_no();
         Assert.assertNotNull(pizza.getPizza_no());
@@ -44,7 +49,7 @@ public class TestPizzaService extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetPizzaInfo() throws Exception {
-        Pizza pizza = service.getPizzaInfo();
+        List<Pizza> pizza = service.getPizzaInfo();
         Assert.assertNotNull(pizza);
 
     }

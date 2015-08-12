@@ -6,6 +6,9 @@ import za.ac.cput.myorderapp.Domain.Base;
 import za.ac.cput.myorderapp.Repository.BaseRepository;
 import za.ac.cput.myorderapp.Services.BaseService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andies on 2015-05-20.
  */
@@ -15,8 +18,13 @@ public class BaseServiceImpl implements BaseService {
     BaseRepository repository;
 
     @Override
-    public Base getBaseInfo() {
-        Base base = repository.findOne((long) 1);
-        return base;
+    public List<Base> getBaseInfo() {
+        List<Base> bases = new ArrayList<>();
+        Iterable<Base> values = repository.findAll();
+        for (Base value : values) {
+            bases.add(value);
+        }
+
+        return bases;
     }
 }

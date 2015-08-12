@@ -10,9 +10,7 @@ import za.ac.cput.myorderapp.conf.Factory.OrderFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by student on 2015/04/23.
@@ -37,11 +35,12 @@ public class TestCustomer {
 
         Date date = new Date();
 
-        /*ContactAddress address = AddressFactory.createAddress(addr, 8001);
+        ContactAddress address = AddressFactory.createAddress(addr, 8001);
         CustomerContactsNos contactsNos = ContactsFactory.createContacts("12345", "67890");
-        Order order = OrderFactory.createOrder(date);*/
+       // Order order = OrderFactory.createOrder(date);*/
+        List<Orders> ordersList = new ArrayList<>();
 
-        Customer customer = CustomerFactory.createCustomer(custDetails);// address, contactsNos,order);
+        Customer customer = CustomerFactory.createCustomer(custDetails, "andisiwe", "peter", address, contactsNos, ordersList);// address, contactsNos,order);
         Assert.assertEquals("Andisiwe", customer.getName());
 
     }
@@ -59,11 +58,12 @@ public class TestCustomer {
         Date date = new Date();
         System.out.println(date);
 
-        /*ContactAddress address = AddressFactory.createAddress(addr, 8001);
+        ContactAddress address = AddressFactory.createAddress(addr, 8001);
         CustomerContactsNos contactsNos = ContactsFactory.createContacts("12345", "67890");
-        Order order = OrderFactory.createOrder(date);*/
+       // Orders order = OrderFactory.createOrder(date);
+        List<Orders> ordersList = new ArrayList<>();
 
-        Customer customer = CustomerFactory.createCustomer(custDetails);// address, contactsNos,order);
+        Customer customer = CustomerFactory.createCustomer(custDetails,"andisiwe", "peter", address, contactsNos, ordersList);// address, contactsNos,order);
 
         Customer newCustomer = new Customer.Builder("Andisiwe")
                                             .copy(customer)

@@ -3,12 +3,14 @@ package za.ac.cput.myorderapp.Model;
 import org.springframework.hateoas.ResourceSupport;
 import za.ac.cput.myorderapp.Repository.OrderRepository;
 
+import java.util.Date;
+
 /**
  * Created by Andies on 2015-05-21.
  */
 public class OrderResource extends ResourceSupport {
     private Long orderNo;
-    private String order_date;
+    private Date order_date;
 
     private OrderResource(){}
 
@@ -18,13 +20,13 @@ public class OrderResource extends ResourceSupport {
     }
 
     public Long getOrderNo(){return orderNo;}
-    public String getOrder_date(){return order_date;}
+    public Date getOrder_date(){return order_date;}
 
     public static class Builder{
         private Long orderNo;
-        private String order_date;
+        private Date order_date;
 
-        public Builder(String order_date){
+        public Builder(Date order_date){
             this.order_date = order_date;
         }
 

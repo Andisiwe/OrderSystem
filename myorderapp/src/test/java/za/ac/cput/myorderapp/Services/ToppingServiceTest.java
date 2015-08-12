@@ -8,9 +8,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import za.ac.cput.myorderapp.App;
+import za.ac.cput.myorderapp.Domain.AuditTopping;
 import za.ac.cput.myorderapp.Domain.Topping;
 import za.ac.cput.myorderapp.Repository.ToppingRepository;
 import za.ac.cput.myorderapp.conf.Factory.ToppingFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-20.
@@ -35,7 +39,8 @@ public class ToppingServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        Topping topping = ToppingFactory.createTopping(5);
+        List<AuditTopping> auditToppings = new ArrayList<>();
+        Topping topping = ToppingFactory.createTopping(5,auditToppings);
         repository.save(topping);
         id = topping.getTop_code();
         Assert.assertNotNull(topping.getTop_code());
@@ -44,7 +49,7 @@ public class ToppingServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetToppingInfo() throws Exception {
-        Topping topping = service.getToppingInfo();
+        List<Topping> topping = service.getToppingInfo();
         Assert.assertNotNull(topping);
 
     }

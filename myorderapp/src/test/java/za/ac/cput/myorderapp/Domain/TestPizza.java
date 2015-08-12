@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import za.ac.cput.myorderapp.conf.Factory.PizzaFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andies on 2015-05-14.
  */
@@ -17,7 +20,8 @@ public class TestPizza {
 
     @Test
     public void testCreatePizza() throws Exception {
-        Pizza pizza = PizzaFactory.createPizza("Something meaty", 60);
+        List<Topping>toppings = new ArrayList<>();
+        Pizza pizza = PizzaFactory.createPizza("Something meaty", 60/*, toppings*/);
 
         Assert.assertEquals("Something meaty", pizza.getName());
 

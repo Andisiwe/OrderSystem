@@ -17,9 +17,7 @@ import za.ac.cput.myorderapp.conf.Factory.ContactsFactory;
 import za.ac.cput.myorderapp.conf.Factory.CustomerFactory;
 import za.ac.cput.myorderapp.conf.Factory.OrderFactory;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by student on 2015/05/03.
@@ -53,9 +51,9 @@ public class TestCrudCustomer extends AbstractTestNGSpringContextTests {
 
         ContactAddress contactAddress = AddressFactory.createAddress(address, 8001);
         CustomerContactsNos contactsNos = ContactsFactory.createContacts("082123", "021123");
-        Orders orders = OrderFactory.createOrder("10-MAY-15");
-
-        Customer customer = CustomerFactory.createCustomer(custDetails);// contactAddress, contactsNos,order);
+       // Orders orders = OrderFactory.createOrder("10-MAY-15");
+        List<Orders> order = new ArrayList<>();
+        Customer customer = CustomerFactory.createCustomer(custDetails,"andisiwe", "peter", contactAddress, contactsNos,order);
 
         customerRepository.save(customer);
         id = customer.getId();
@@ -84,11 +82,11 @@ public class TestCrudCustomer extends AbstractTestNGSpringContextTests {
 
         Date date = new Date();
 
-        /*ContactAddress contactAddress = AddressFactory.createAddress(address, 8001);
+        ContactAddress contactAddress = AddressFactory.createAddress(address, 8001);
         CustomerContactsNos contactsNos = ContactsFactory.createContacts("082123", "021123");
-        Order order = OrderFactory.createOrder(date);*/
-
-        Customer newCustomer = CustomerFactory.createCustomer(custDetails);// contactAddress, contactsNos,order);
+        //Order order = OrderFactory.createOrder(date);*/
+        List<Orders> order = new ArrayList<>();
+        Customer newCustomer = CustomerFactory.createCustomer(custDetails,"andisiwe", "peter", contactAddress, contactsNos,order);
 
         customerRepository.save(newCustomer);
         Assert.assertEquals("Yamkela", newCustomer.getName());

@@ -23,21 +23,23 @@ public class OrderPage {
     @Autowired
     private OrderService service;
     @RequestMapping(value = "/(id)", method = RequestMethod.GET)
-    public Orders getOrder(@PathVariable Long id){
+    public List<Orders> getOrder(@PathVariable Long id){
         return service.getOrderInfo();
     }
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public List<OrderResource> getOrders(){
         List<OrderResource>hateos = new ArrayList<>();
-        Orders orders = service.getOrderInfo();
-        OrderResource resource = new OrderResource.Builder(orders.getOrder_date())
-                                                  .orderNo(orders.getOrderNo())
-                                                  .build();
-        Link ord = new Link("http://localhost:8080/order"+resource.getOrderNo().toString())
-                .withRel("ord");
-        resource.add(ord);
-        hateos.add(resource);
+        List<Orders> orders = service.getOrderInfo();
+        for(Orders orders1: orders) {
+            OrderResource resource = new OrderResource.Builder(orders1.getOrder_date())
+                    .orderNo(orders1.getOrderNo())
+                    .build();
+            Link ord = new Link("http://localhost:8080/order" + resource.getOrderNo().toString())
+                    .withRel("ord");
+            resource.add(ord);
+            hateos.add(resource);
+        }
         return hateos;
     }
 }

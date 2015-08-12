@@ -8,9 +8,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 import za.ac.cput.myorderapp.App;
 import za.ac.cput.myorderapp.Domain.Orders;
+import za.ac.cput.myorderapp.Domain.Pizza;
 import za.ac.cput.myorderapp.conf.Factory.OrderFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-19.
@@ -26,7 +29,8 @@ public class TestCrudOrder extends AbstractTestNGSpringContextTests {
     @Test
     public void create() throws Exception {
         Date date = new Date();
-        Orders orders = OrderFactory.createOrder("2015-05-10");
+        //sList<Pizza> pizzas = new ArrayList<>();
+        Orders orders = OrderFactory.createOrder(date /*, pizzas*/);
         orderRepository.save(orders);
         id = orders.getOrderNo();
         Assert.assertNotNull(orders.getOrderNo());
@@ -35,9 +39,9 @@ public class TestCrudOrder extends AbstractTestNGSpringContextTests {
 
     @Test(dependsOnMethods = "create")
     public void read() throws Exception {
+        Date date = new Date();
         Orders orders = orderRepository.findOne(id);
         Assert.assertNotNull(orders.getOrderNo());
-        Assert.assertEquals("2015-05-10", orders.getOrder_date());
 
     }
 

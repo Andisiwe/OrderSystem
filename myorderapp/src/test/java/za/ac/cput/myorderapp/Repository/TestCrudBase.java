@@ -8,7 +8,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 import za.ac.cput.myorderapp.App;
 import za.ac.cput.myorderapp.Domain.Base;
+import za.ac.cput.myorderapp.Domain.Pizza;
 import za.ac.cput.myorderapp.conf.Factory.BaseFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andies on 2015-05-19.
@@ -23,7 +27,8 @@ public class TestCrudBase extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        Base base = BaseFactory.createBase("Large", 60);
+        List<Pizza>pizzas = new ArrayList<>();
+        Base base = BaseFactory.createBase("Large", 60, pizzas);
         repository.save(base);
         id = base.getBaseCode();
         Assert.assertNotNull(base.getBaseCode());

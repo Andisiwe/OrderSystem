@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import za.ac.cput.myorderapp.conf.Factory.ToppingFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andies on 2015-05-14.
  */
@@ -16,7 +19,8 @@ public class TestTopping {
 
     @Test
     public void testCreateTopping() throws Exception {
-        Topping topping = ToppingFactory.createTopping(5);
+        List<AuditTopping> auditToppings = new ArrayList<>();
+        Topping topping = ToppingFactory.createTopping(5,auditToppings);
 
     }
 }

@@ -23,22 +23,24 @@ public class PizzaPage {
     @Autowired
     private PizzaService service;
     @RequestMapping(value = "/(id)", method = RequestMethod.GET)
-    public Pizza getPizza(@PathVariable Long id){
+    public List<Pizza> getPizza(@PathVariable Long id){
         return service.getPizzaInfo();
     }
 
     @RequestMapping(value = "/pizzas", method = RequestMethod.GET)
     public List<PizzaResource> getPizzas(){
         List<PizzaResource>hateos = new ArrayList<>();
-        Pizza pizza = service.getPizzaInfo();
-        PizzaResource resource = new PizzaResource.Builder(pizza.getName())
-                                                  .pizza_no(pizza.getPizza_no())
-                                                  .price(pizza.getPrice())
-                                                  .build();
-        Link piz = new Link("http://localhost:8080/pizza"+resource.getPizza_no().toString())
-                .withRel("piz");
-        resource.add(piz);
-        hateos.add(resource);
+        List<Pizza> pizza = service.getPizzaInfo();
+        for(Pizza pizza1: pizza) {
+            PizzaResource resource = new PizzaResource.Builder(pizza1.getName())
+                    .pizza_no(pizza1.getPizza_no())
+                    .price(pizza1.getPrice())
+                    .build();
+            Link piz = new Link("http://localhost:8080/pizza" + resource.getPizza_no().toString())
+                    .withRel("piz");
+            resource.add(piz);
+            hateos.add(resource);
+        }
         return hateos;
     }
 }
