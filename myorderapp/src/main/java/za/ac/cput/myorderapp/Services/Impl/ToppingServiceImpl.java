@@ -18,14 +18,34 @@ public class ToppingServiceImpl implements ToppingService{
     ToppingRepository repository;
 
     @Override
-    public List<Topping> getToppingInfo() {
-        List<Topping> toppings = new ArrayList<>();
+    public List<Topping> findAll() {
+        List<Topping> allToppings = new ArrayList<>();
 
-        Iterable<Topping> topping = repository.findAll();
-        for (Topping topping1 : topping){
-            toppings.add(topping1);
+        Iterable<Topping> toppings = repository.findAll();
+        for (Topping topping : toppings){
+            allToppings.add(topping);
         }
 
-        return toppings;
+        return allToppings;
+    }
+
+    @Override
+    public Topping findById(Long id) {
+        return repository.findOne(id);
+    }
+
+    @Override
+    public Topping save(Topping entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public Topping update(Topping entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public void delete(Topping entity) {
+        repository.delete(entity);
     }
 }

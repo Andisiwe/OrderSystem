@@ -65,7 +65,7 @@ public class CustomerServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetCustomerInfo() throws Exception {
-        List<Customer> customer = service.getCustomerInfo();
+        List<Customer> customer = service.findAll();
         Assert.assertNotNull(customer);
 
     }

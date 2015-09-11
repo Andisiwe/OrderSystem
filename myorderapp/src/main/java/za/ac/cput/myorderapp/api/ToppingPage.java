@@ -2,9 +2,11 @@ package za.ac.cput.myorderapp.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import sun.awt.image.ImageWatched;
 import za.ac.cput.myorderapp.Domain.Topping;
 import za.ac.cput.myorderapp.Model.ToppingResource;
@@ -21,24 +23,54 @@ import java.util.List;
 public class ToppingPage {
     @Autowired
     private ToppingService service;
-    @RequestMapping(value = "/(id)", method = RequestMethod.GET)
-    public List<Topping> getTopping(){
-        return service.getToppingInfo();
+
+    @RequestMapping(value = "/topping", method = RequestMethod.GET)
+    public ResponseEntity<List<Topping>> listAllToppings(){
+        List<Topping> Toppings = service.findAll();
+        if(Toppings.isEmpty()){
+            return new ResponseEntity<List<Topping>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Topping>>(Toppings, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/toppings", method = RequestMethod.GET)
-    public List<ToppingResource> getToppings(){
-        List<ToppingResource>hateos= new ArrayList<>();
-        List<Topping> toppings = service.getToppingInfo();
-        for(Topping topping: toppings ) {
-            ToppingResource resource = new ToppingResource.Builder(topping.getPrice())
-                    .top_code(topping.getTop_code())
-                    .build();
-            Link top = new Link("http://localhost:8080/topping/" + resource.getTop_code().toString())
-                    .withRel("top");
-            resource.add(top);
-            hateos.add(resource);
+    @RequestMapping(value = "/topping/create", method = RequestMethod.POST)
+    public ResponseEntity<Void> createBase(@RequestBody Topping topping, UriComponentsBuilder ucBuilder) {
+        System.out.println("Creating Topping " + topping.getToppingName());
+        service.save(topping);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/topping/{id}").buildAndExpand(topping.getTop_code()).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/topping/update/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Topping> updateTopping(@PathVariable("id") long id, @RequestBody Topping topping) {
+        System.out.println("Updating Topping " + id);
+        Topping currentTopping = service.findById(id);
+
+        if (currentTopping == null) {
+            System.out.println("Topping with id " + id + " not found");
+            return new ResponseEntity<Topping>(HttpStatus.NOT_FOUND);
         }
-        return hateos;
+
+        Topping updatedTopping = new Topping.Builder(currentTopping.getToppingName())
+                .copy(currentTopping)
+                .build();
+        service.update(updatedTopping);
+        return new ResponseEntity<Topping>(updatedTopping, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/topping/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Topping> deleteBase(@PathVariable("id") long id) {
+        System.out.println("Fetching & Deleting Topping with id " + id);
+
+        Topping topping = service.findById(id);
+        if (topping == null) {
+            System.out.println("Unable to delete. topping with id " + id + " not found");
+            return new ResponseEntity<Topping>(HttpStatus.NOT_FOUND);
+        }
+
+        service.delete(topping);
+        return new ResponseEntity<Topping>(HttpStatus.NO_CONTENT);
     }
 }

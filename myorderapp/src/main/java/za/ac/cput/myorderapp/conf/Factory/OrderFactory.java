@@ -3,7 +3,7 @@ package za.ac.cput.myorderapp.conf.Factory;
 import za.ac.cput.myorderapp.Domain.Orders;
 import za.ac.cput.myorderapp.Domain.Pizza;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**

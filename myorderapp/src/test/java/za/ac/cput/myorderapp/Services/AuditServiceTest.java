@@ -41,8 +41,9 @@ public class AuditServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void create() throws Exception {
         Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-        AuditTopping auditTopping = AuditFactory.createAudit(date, 5, 7);
+        AuditTopping auditTopping = AuditFactory.createAudit(sqlDate, 5, 7);
         repository.save(auditTopping);
         id = auditTopping.getUser_id();
         Assert.assertNotNull(auditTopping.getUser_id());
@@ -51,7 +52,7 @@ public class AuditServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test(dependsOnMethods = "create")
     public void testGetAuditInfo() throws Exception {
-        List<AuditTopping> auditTopping = service.getAuditInfo();
+        List<AuditTopping> auditTopping = service.findAll();
         Assert.assertNotNull(auditTopping);
 
     }

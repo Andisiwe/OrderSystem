@@ -8,5 +8,13 @@ import java.util.List;
  * Created by Andies on 2015-05-20.
  */
 public interface ToppingService {
-    List<Topping> getToppingInfo();
+    public List<Topping> findAll();
+
+    public Topping findById(Long id);
+
+    public Topping save(Topping entity);
+
+    public Topping update(Topping entity);
+
+    public void delete(Topping entity);
 }

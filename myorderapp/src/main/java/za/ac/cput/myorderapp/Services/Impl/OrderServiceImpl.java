@@ -18,14 +18,34 @@ public class OrderServiceImpl implements OrderService{
     OrderRepository repository;
 
     @Override
-    public List<Orders> getOrderInfo() {
-        List<Orders> orders = new ArrayList<>();
+    public List<Orders> findAll() {
+        List<Orders> allOrders = new ArrayList<>();
 
-        Iterable<Orders> order = repository.findAll();
-        for (Orders orders1 : order){
-            orders.add(orders1);
+        Iterable<Orders> orders = repository.findAll();
+        for (Orders order : orders){
+            allOrders.add(order);
         }
 
-        return orders;
+        return allOrders;
+    }
+
+    @Override
+    public Orders findById(Long id) {
+        return repository.findOne(id);
+    }
+
+    @Override
+    public Orders save(Orders entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public Orders update(Orders entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public void delete(Orders entity) {
+        repository.delete(entity);
     }
 }

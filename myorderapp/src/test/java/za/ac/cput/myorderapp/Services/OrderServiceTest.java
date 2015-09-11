@@ -42,7 +42,8 @@ public class OrderServiceTest extends AbstractTestNGSpringContextTests {
     public void create() throws Exception {
        // List<Pizza> pizzas = new ArrayList<>();
         Date date = new Date();
-        Orders orders = OrderFactory.createOrder(date /*, pizzas*/);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        Orders orders = OrderFactory.createOrder(sqlDate /*, pizzas*/);
         repository.save(orders);
         id = orders.getOrderNo();
         Assert.assertNotNull(orders.getOrderNo());
@@ -51,7 +52,7 @@ public class OrderServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetOrderInfo() throws Exception {
-        List<Orders> orders = service.getOrderInfo();
+        List<Orders> orders = service.findAll();
         Assert.assertNotNull(orders);
 
     }

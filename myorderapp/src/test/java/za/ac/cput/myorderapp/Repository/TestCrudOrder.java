@@ -29,8 +29,9 @@ public class TestCrudOrder extends AbstractTestNGSpringContextTests {
     @Test
     public void create() throws Exception {
         Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         //sList<Pizza> pizzas = new ArrayList<>();
-        Orders orders = OrderFactory.createOrder(date /*, pizzas*/);
+        Orders orders = OrderFactory.createOrder(sqlDate /*, pizzas*/);
         orderRepository.save(orders);
         id = orders.getOrderNo();
         Assert.assertNotNull(orders.getOrderNo());

@@ -18,13 +18,33 @@ public class AuditServiceImpl implements AuditToppingService {
     private AuditToppingRepository repository;
 
     @Override
-    public List<AuditTopping> getAuditInfo() {
+    public List<AuditTopping> findAll() {
         List<AuditTopping> allAuditToppings = new ArrayList<>();
 
         Iterable<AuditTopping> auditToppings = repository.findAll();
-        for (AuditTopping auditTopping1 : auditToppings){
-            allAuditToppings.add(auditTopping1);
+        for (AuditTopping auditTopping : auditToppings){
+            allAuditToppings.add(auditTopping);
         }
         return allAuditToppings;
+    }
+
+    @Override
+    public AuditTopping findById(Long id) {
+        return repository.findOne(id);
+    }
+
+    @Override
+    public AuditTopping save(AuditTopping entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public AuditTopping update(AuditTopping entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public void delete(AuditTopping entity) {
+        repository.delete(entity);
     }
 }

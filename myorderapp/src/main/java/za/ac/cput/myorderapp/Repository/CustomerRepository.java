@@ -8,4 +8,5 @@ import za.ac.cput.myorderapp.Domain.Customer;
  */
 public interface CustomerRepository extends CrudRepository<Customer, Long>{
 
+
 }

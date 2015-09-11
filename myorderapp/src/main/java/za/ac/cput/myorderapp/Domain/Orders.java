@@ -2,7 +2,7 @@ package za.ac.cput.myorderapp.Domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderNo;
-    private Date order_date;
+    private  Date order_date;
    /* @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_no")
     private List<Pizza> pizza;*/
@@ -48,6 +48,12 @@ public class Orders implements Serializable {
             this.pizza = pizza;
             return this;
         }*/
+
+        public Builder copy(Orders value){
+            this.order_date = value.order_date;
+            this.orderNo = value.orderNo;
+            return this;
+        }
 
         public Orders build(){return new Orders(this);}
     }

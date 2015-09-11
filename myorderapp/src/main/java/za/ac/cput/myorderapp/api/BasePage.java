@@ -2,10 +2,11 @@ package za.ac.cput.myorderapp.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import za.ac.cput.myorderapp.Domain.Base;
 import za.ac.cput.myorderapp.Model.BaseResource;
 import za.ac.cput.myorderapp.Services.BaseService;
@@ -17,31 +18,58 @@ import java.util.List;
  * Created by student on 2015/08/11.
  */
 @RestController
-@RequestMapping(value = "/base/**")
+@RequestMapping(value = "/api/**")
 public class BasePage {
     @Autowired
     private BaseService service;
 
-    @RequestMapping(value = "/(id)", method = RequestMethod.GET)
-    public List<Base> getBase(@PathVariable Long id){
-        return service.getBaseInfo();
+    @RequestMapping(value = "/base", method = RequestMethod.GET)
+    public ResponseEntity<List<Base>> listAllBases(){
+        List<Base> Bases = service.findAll();
+        if(Bases.isEmpty()){
+            return new ResponseEntity<List<Base>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Base>>(Bases, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/bases", method = RequestMethod.GET)
-    public List<BaseResource> getBases() {
-        List<BaseResource> hateos = new ArrayList<>();
-        List<Base> bases = service.getBaseInfo();
-        for(Base base1: bases) {
-            BaseResource resource = new BaseResource.Builder(base1.getPizzaSize())
-                    .price(base1.getPrice())
-                    .baseCode(base1.getBaseCode())
-                    .build();
-            Link cust = new Link("http://localhost:8080/base/" + resource.getBaseCode().toString())
-                    .withRel("cust");
-            resource.add(cust);
-            hateos.add(resource);
+    @RequestMapping(value = "/base/create", method = RequestMethod.POST)
+    public ResponseEntity<Void> createBase(@RequestBody Base base, UriComponentsBuilder ucBuilder) {
+        System.out.println("Creating Base " + base.getPizzaSize());
+        service.save(base);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/base/{id}").buildAndExpand(base.getBaseCode()).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/base/update/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Base> updateBase(@PathVariable("id") long id, @RequestBody Base base) {
+        System.out.println("Updating Base " + id);
+        Base currentBase = service.findById(id);
+
+        if (currentBase == null) {
+            System.out.println("Base with id " + id + " not found");
+            return new ResponseEntity<Base>(HttpStatus.NOT_FOUND);
         }
 
-        return hateos;
+        Base updatedBase = new Base.Builder(currentBase.getPizzaSize())
+                .copy(currentBase)
+                .build();
+        service.update(updatedBase);
+        return new ResponseEntity<Base>(updatedBase, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/base/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Base> deleteBase(@PathVariable("id") long id) {
+        System.out.println("Fetching & Deleting Base with id " + id);
+
+        Base base = service.findById(id);
+        if (base == null) {
+            System.out.println("Unable to delete. base with id " + id + " not found");
+            return new ResponseEntity<Base>(HttpStatus.NOT_FOUND);
+        }
+
+        service.delete(base);
+        return new ResponseEntity<Base>(HttpStatus.NO_CONTENT);
     }
 }

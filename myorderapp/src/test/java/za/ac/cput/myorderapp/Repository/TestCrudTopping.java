@@ -35,7 +35,7 @@ public class TestCrudTopping extends AbstractTestNGSpringContextTests {
     @Test
     public void create() throws Exception {
         List<AuditTopping> auditToppings = new ArrayList<>();
-        Topping topping = ToppingFactory.createTopping(5, auditToppings);
+        Topping topping = ToppingFactory.createTopping("Pine Apple",5, auditToppings);
         repository.save(topping);
         id = topping.getTop_code();
         Assert.assertNotNull(topping.getTop_code());

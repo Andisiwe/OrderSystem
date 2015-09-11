@@ -18,14 +18,34 @@ public class PizzaServiceImpl implements PizzaService{
     PizzaRepository repository;
 
     @Override
-    public List<Pizza> getPizzaInfo() {
-        List<Pizza> pizzas = new ArrayList<>();
+    public List<Pizza> findAll() {
+        List<Pizza> allPizzas = new ArrayList<>();
 
-        Iterable<Pizza> pizza = repository.findAll();
-        for (Pizza pizza1 : pizza){
-            pizzas.add(pizza1);
+        Iterable<Pizza> pizzas = repository.findAll();
+        for (Pizza pizza : pizzas){
+            allPizzas.add(pizza);
         }
 
-        return pizzas;
+        return allPizzas;
+    }
+
+    @Override
+    public Pizza findById(Long id) {
+        return repository.findOne(id);
+    }
+
+    @Override
+    public Pizza save(Pizza entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public Pizza update(Pizza entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public void delete(Pizza entity) {
+        repository.delete(entity);
     }
 }

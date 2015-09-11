@@ -3,7 +3,7 @@ package za.ac.cput.myorderapp.conf.Factory;
 import za.ac.cput.myorderapp.Domain.AuditTopping;
 import za.ac.cput.myorderapp.Domain.Topping;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**

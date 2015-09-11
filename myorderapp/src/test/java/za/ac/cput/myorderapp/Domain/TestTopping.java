@@ -20,7 +20,7 @@ public class TestTopping {
     @Test
     public void testCreateTopping() throws Exception {
         List<AuditTopping> auditToppings = new ArrayList<>();
-        Topping topping = ToppingFactory.createTopping(5,auditToppings);
+        Topping topping = ToppingFactory.createTopping("Pine Apple", 5,auditToppings);
 
     }
 }

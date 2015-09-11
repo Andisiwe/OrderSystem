@@ -21,12 +21,13 @@ public class HomePage {
     private AuditToppingService service;
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
-    public String index(){return "Home Page";}
+    public String index(){return "This is a Home Page";}
 
     @RequestMapping(value = "/auditTopping", method = RequestMethod.GET)
     public AuditTopping getAuditTopping(){
         Date date = new Date();
-        AuditTopping auditTopping = new AuditTopping.Builder(date)
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        AuditTopping auditTopping = new AuditTopping.Builder(sqlDate)
                                                     .oldPrice(5)
                                                     .newPrice(7)
                                                     .build();
@@ -34,5 +35,5 @@ public class HomePage {
     }
 
     @RequestMapping(value = "/auditInfo", method = RequestMethod.GET)
-    public List<AuditTopping> getAuditToppings(){return service.getAuditInfo();}
+    public List<AuditTopping> getAuditToppings(){return service.findAll();}
 }

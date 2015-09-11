@@ -23,7 +23,8 @@ public class TestOrder {
     public void testCreateOrder() throws Exception {
         //List<Pizza> pizzas = new ArrayList<>();
         Date date = new Date();
-        Orders orders = OrderFactory.createOrder(date /*, pizzas*/);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        Orders orders = OrderFactory.createOrder(sqlDate /*, pizzas*/);
 
         Assert.assertEquals(date, orders.getOrder_date());
     }

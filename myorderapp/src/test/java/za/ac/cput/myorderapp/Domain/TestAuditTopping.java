@@ -22,8 +22,9 @@ public class TestAuditTopping {
     @Test
     public void testCreateAudit() throws Exception {
         Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-        AuditTopping auditTopping = AuditFactory.createAudit(date,5,7);
+        AuditTopping auditTopping = AuditFactory.createAudit(sqlDate,5,7);
 
         Assert.assertEquals(7, auditTopping.getNewPrice(), 2);
 

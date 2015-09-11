@@ -18,14 +18,34 @@ public class CustomerServiceImpl implements CustomerService{
     CustomerRepository repository;
 
     @Override
-    public List<Customer> getCustomerInfo() {
-        List<Customer> customers = new ArrayList<>();
+    public List<Customer> findAll() {
+        List<Customer> allCustomers = new ArrayList<>();
 
-        Iterable<Customer> customers1s = repository.findAll();
-        for (Customer customer1 : customers1s){
-            customers.add(customer1);
+        Iterable<Customer> customers = repository.findAll();
+        for (Customer customer : customers){
+            allCustomers.add(customer);
         }
 
-        return customers;
+        return allCustomers;
+    }
+
+    @Override
+    public Customer findById(Long id) {
+        return repository.findOne(id);
+    }
+
+    @Override
+    public Customer save(Customer entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public Customer update(Customer entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public void delete(Customer entity) {
+        repository.delete(entity);
     }
 }

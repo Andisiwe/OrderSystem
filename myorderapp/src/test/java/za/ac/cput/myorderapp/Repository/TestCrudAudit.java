@@ -29,8 +29,8 @@ public class TestCrudAudit extends AbstractTestNGSpringContextTests {
     @Test
     public void create() throws Exception {
         Date date = new Date();
-
-        AuditTopping auditTopping = AuditFactory.createAudit(date, 5, 7);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        AuditTopping auditTopping = AuditFactory.createAudit(sqlDate, 5, 7);
         repository.save(auditTopping);
         id = auditTopping.getUser_id();
         Assert.assertNotNull(auditTopping.getUser_id());
@@ -49,8 +49,9 @@ public class TestCrudAudit extends AbstractTestNGSpringContextTests {
     @Test(dependsOnMethods = "read")
     public void update() throws Exception {
         Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         AuditTopping auditTopping = repository.findOne(id);
-        AuditTopping newAudit = new AuditTopping.Builder(date)
+        AuditTopping newAudit = new AuditTopping.Builder(sqlDate)
                                                 .copy(auditTopping)
                                                 .newPrice(8)
                                                 .build();

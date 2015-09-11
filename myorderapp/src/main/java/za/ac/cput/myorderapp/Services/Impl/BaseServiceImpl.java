@@ -18,13 +18,37 @@ public class BaseServiceImpl implements BaseService {
     BaseRepository repository;
 
     @Override
-    public List<Base> getBaseInfo() {
-        List<Base> bases = new ArrayList<>();
-        Iterable<Base> values = repository.findAll();
-        for (Base value : values) {
-            bases.add(value);
+    public List<Base> findAll() {
+        List<Base> allBases = new ArrayList<>();
+        Iterable<Base> bases = repository.findAll();
+        for (Base base : bases) {
+            allBases.add(base);
         }
 
-        return bases;
+        return allBases;
+    }
+
+    public BaseServiceImpl() {
+        super();
+    }
+
+    @Override
+    public Base findById(Long id) {
+        return repository.findOne(id);
+    }
+
+    @Override
+    public Base save(Base entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public Base update(Base entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public void delete(Base entity) {
+        repository.delete(entity);
     }
 }

@@ -49,7 +49,7 @@ public class TestPizzaService extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetPizzaInfo() throws Exception {
-        List<Pizza> pizza = service.getPizzaInfo();
+        List<Pizza> pizza = service.findAll();
         Assert.assertNotNull(pizza);
 
     }

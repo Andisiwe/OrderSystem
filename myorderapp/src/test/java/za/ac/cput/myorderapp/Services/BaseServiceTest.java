@@ -49,7 +49,7 @@ public class BaseServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetBaseInfo() throws Exception {
-        List<Base> base = service.getBaseInfo();
+        List<Base> base = service.findAll();
         Assert.assertNotNull(base);
 
     }

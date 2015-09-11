@@ -33,6 +33,8 @@
       <column name="home_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="surname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="username" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="cust_id"/>
       <exported-key name="FK_s32ku57qouy9bwgs8uhxv3s0j" table="orders" schema="" catalog="order_information" columns="cust_id"/>
     </table>
@@ -51,13 +53,18 @@
       <column name="base_code" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="pizza_no"/>
       <foreign-key name="FK_r5ch819q42yjcqh4fxwychg82" columns="base_code" ref-table="base" ref-schema="" ref-catalog="order_information" ref-columns="base_code" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_3xw0nar1wprrp1ovw2496iw6u" table="topping" schema="" catalog="order_information" columns="pizza_no"/>
       <index name="FK_r5ch819q42yjcqh4fxwychg82" unique="false" columns="base_code"/>
     </table>
     <table name="topping" schema="" catalog="order_information" type="TABLE">
       <column name="top_code" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="price" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="pizza_no" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="topping_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="top_code"/>
+      <foreign-key name="FK_3xw0nar1wprrp1ovw2496iw6u" columns="pizza_no" ref-table="pizza" ref-schema="" ref-catalog="order_information" ref-columns="pizza_no" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_8mcj2vljr38padfeqmn9hw369" table="audit_topping" schema="" catalog="order_information" columns="top_code"/>
+      <index name="FK_3xw0nar1wprrp1ovw2496iw6u" unique="false" columns="pizza_no"/>
     </table>
   </data-source>
 </component>
